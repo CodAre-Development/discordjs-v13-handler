@@ -12,17 +12,14 @@ module.exports = class {
     }
 
     async init() {
-        const basePath = './src/Commands';
-        const dirs = readdirSync(basePath);
-        dirs.forEach(async (dir) => {
-            const commandNames = readdirSync(`${basePath}/${dir}`);
-            for (const commandName of commandNames) {
-                const command = this.importCommand(
-                    `${basePath}/${dir}/${commandName}`,
-                );
-                this.registerCommand(command);
-            }
-        });
+        const basePath = './src/Commands/';
+        const commandNames = readdirSync(basePath).filter((i) =>
+            i.endsWith('.js'),
+        );
+        for (const commandName of commandNames) {
+            const command = this.importCommand(basePath + commandName);
+            this.registerCommand(command);
+        }
         await this.registerCommands();
     }
 
@@ -31,16 +28,15 @@ module.exports = class {
     }
 
     async registerCommand(command) {
-        if (!command.isSlash && !command.isContext) {
+        if (command.isMessage) {
             this.commands.set(command.name, command);
-            return;
         }
         delete command['aliases'];
-        if (command.isContext) delete command['description'];
-        delete command['isSlash'];
-        delete command['isContext'];
-        this._commands.push(command);
-        this.applicationCommands.set(command.name, command);
+
+        if (command.isSlash) {
+            this._commands.push(command);
+            this.applicationCommands.set(command.name, command);
+        }
     }
 
     async registerCommands() {

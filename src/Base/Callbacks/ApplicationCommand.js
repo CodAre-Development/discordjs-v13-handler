@@ -1,5 +1,5 @@
 module.exports = async (interaction) => {
-    if (!interaction.isCommand() && !interaction.isContextMenu()) return;
+    if (!interaction.isCommand()) return;
     const { client: bot } = interaction;
 
     await interaction.deferReply();
@@ -11,7 +11,9 @@ module.exports = async (interaction) => {
     if (!command) return;
 
     try {
-        command.run(interaction);
+        if (interaction.isCommand()) {
+            command.slashRun(interaction);
+        }
     } catch (e) {
         console.error(e);
     }

@@ -4,16 +4,14 @@ module.exports = class {
         aliases,
         description = 'None',
         options,
-        type = 1,
-        isSlash,
-        isContext,
+        isSlash = false,
+        isMessage = false,
     }) {
         this.name = name;
         this.aliases = aliases;
         this.description = description;
         this.options = options;
-        this.type = type;
         this.isSlash = isSlash;
-        this.isContext = isContext;
+        this.isMessage = isMessage;
     }
 };

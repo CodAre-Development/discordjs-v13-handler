@@ -17,7 +17,7 @@ module.exports = async (message) => {
     if (!command) return;
 
     try {
-        command.run(message, args);
+        command.messageRun(message, args);
     } catch (e) {
         console.error(e);
     }
