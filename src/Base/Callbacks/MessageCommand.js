@@ -10,8 +10,8 @@ module.exports = async (message) => {
 
     const command =
         bot.commandHandler.commands.get(commandName) ||
-        bot.commandHandler.commands.get(
-            bot.commandHandler.aliases.get(commandName),
+        bot.commandHandler.commands.find((cmd) =>
+            cmd.aliases?.includes(commandName),
         );
 
     if (!command) return;

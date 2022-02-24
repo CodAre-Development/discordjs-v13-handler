@@ -8,7 +8,6 @@ module.exports = class {
         this._commands = [];
         this.applicationCommands = new Collection();
         this.commands = new Collection();
-        this.aliases = new Collection();
         this.prefix = '!';
     }
 
