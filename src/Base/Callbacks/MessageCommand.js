@@ -17,7 +17,11 @@ module.exports = async (message) => {
     if (!command) return;
 
     try {
-        command.messageRun(message, args);
+        command.messageRun({
+            bot: message.client,
+            message,
+            args,
+        });
     } catch (e) {
         console.error(e);
     }

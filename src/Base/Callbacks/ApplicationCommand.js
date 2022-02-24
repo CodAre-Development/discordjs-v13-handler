@@ -12,7 +12,11 @@ module.exports = async (interaction) => {
 
     try {
         if (interaction.isCommand()) {
-            command.slashRun(interaction);
+            command.slashRun({
+                bot: interaction.client,
+                interaction,
+                options: interaction.options,
+            });
         }
     } catch (e) {
         console.error(e);

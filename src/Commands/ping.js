@@ -6,15 +6,14 @@ module.exports = class extends Command {
             name: 'ping',
             isSlash: true,
             isMessage: true,
-            isContext: true,
         });
     }
 
-    messageRun(message) {
+    messageRun({ message }) {
         message.reply('Pong');
     }
 
-    slashRun(i) {
-        i.editReply('Pong');
+    slashRun({ interaction }) {
+        interaction.editReply('Pong');
     }
 };
