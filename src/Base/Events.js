@@ -1,4 +1,7 @@
-const { MessageCommandExecute, SlashCommandExecute } = require('./Callbacks');
+const {
+    MessageCommandExecute,
+    ApplicationCommandExecute,
+} = require('./Callbacks');
 
 module.exports = class {
     constructor(bot) {
@@ -9,6 +12,6 @@ module.exports = class {
         this.bot.on('ready', () => console.log('A'));
 
         this.bot.on('messageCreate', MessageCommandExecute);
-        this.bot.on('interactionCreate', SlashCommandExecute);
+        this.bot.on('interactionCreate', ApplicationCommandExecute);
     }
 };

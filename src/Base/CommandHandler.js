@@ -6,7 +6,7 @@ module.exports = class {
     constructor(bot) {
         this.bot = bot;
         this._commands = [];
-        this.slashCommands = new Collection();
+        this.applicationCommands = new Collection();
         this.commands = new Collection();
         this.aliases = new Collection();
         this.prefix = '!';
@@ -24,7 +24,7 @@ module.exports = class {
                 this.registerCommand(command);
             }
         });
-        await this.registerSlashCommands();
+        await this.registerCommands();
     }
 
     importCommand(path) {
@@ -32,17 +32,19 @@ module.exports = class {
     }
 
     async registerCommand(command) {
-        if (!command.isSlash) {
+        if (!command.isSlash && !command.isContext) {
             this.commands.set(command.name, command);
             return;
         }
         delete command['aliases'];
+        if (command.isContext) delete command['description'];
         delete command['isSlash'];
+        delete command['isContext'];
         this._commands.push(command);
-        this.slashCommands.set(command.name, command);
+        this.applicationCommands.set(command.name, command);
     }
 
-    async registerSlashCommands() {
+    async registerCommands() {
         if (this._commands.length < 1) return;
         this.bot.guilds.cache.forEach(async (guild) => {
             await guild.commands.set(this._commands);

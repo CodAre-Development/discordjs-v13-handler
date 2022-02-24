@@ -1,7 +1,7 @@
 const MessageCommandExecute = require('./MessageCommand');
-const SlashCommandExecute = require('./SlashCommand');
+const ApplicationCommandExecute = require('./ApplicationCommand');
 
 module.exports = {
     MessageCommandExecute,
-    SlashCommandExecute,
+    ApplicationCommandExecute,
 };

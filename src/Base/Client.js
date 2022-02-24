@@ -13,7 +13,7 @@ module.exports = class extends Client {
 
     async start() {
         await this.eventManager.init();
-        await this.login();
+        await this.login(process.env.TOKEN);
         await this.commandHandler.init();
     }
 };
