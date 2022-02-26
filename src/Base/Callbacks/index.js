@@ -1,7 +1,5 @@
-const MessageCommandExecute = require('./MessageCommand');
-const ApplicationCommandExecute = require('./ApplicationCommand');
-
 module.exports = {
-    MessageCommandExecute,
-    ApplicationCommandExecute,
+    MessageCommandExecute: require('./MessageCommand'),
+    ApplicationCommandExecute: require('./ApplicationCommand'),
+    GuildCreate: require('./GuildCreateDelete'),
 };

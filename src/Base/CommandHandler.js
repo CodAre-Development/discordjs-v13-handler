@@ -39,10 +39,27 @@ module.exports = class {
         }
     }
 
-    async registerCommands() {
+    async registerCommands(guildId) {
+        if (guildId) {
+            const guild = this.bot.guilds.cache.get(guildId);
+            if (!guild) return;
+            await guild.commands.set(this._commands);
+        }
         if (this._commands.length < 1) return;
         this.bot.guilds.cache.forEach(async (guild) => {
             await guild.commands.set(this._commands);
+        });
+    }
+
+    async removeCommands(guildId) {
+        if (guildId) {
+            const guild = this.bot.guilds.cache.get(guildId);
+            if (!guild) return;
+            await guild.commands.set([]);
+        }
+        if (this._commands.length < 1) return;
+        this.bot.guilds.cache.forEach(async (guild) => {
+            await guild.commands.set([]);
         });
     }
 };
