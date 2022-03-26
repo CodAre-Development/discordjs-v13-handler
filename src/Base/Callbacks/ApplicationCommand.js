@@ -11,13 +11,11 @@ module.exports = async (interaction) => {
     if (!command) return;
 
     try {
-        if (interaction.isCommand()) {
-            command.slashRun({
-                bot: interaction.client,
-                interaction,
-                options: interaction.options,
-            });
-        }
+        command.slashRun({
+            bot: interaction.client,
+            interaction,
+            options: interaction.options,
+        });
     } catch (e) {
         console.error(e);
     }
